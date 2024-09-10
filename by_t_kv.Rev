@@ -83,6 +83,8 @@ idx = 1
 for (k in 2:maxK) {
   transByState[k - 1] <- partitioned[2]
   transByState[k - 1].setNumStatesPartition(k)
+  # Reduce memory footprint, per https://github.com/revbayes/revbayes/issues/552
+  transByState[k - 1].removeExcludedCharacters()
   nc = transByState[k - 1].nchar()
   
   if (nc > 0) {
